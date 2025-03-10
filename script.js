@@ -336,6 +336,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize family animations when the page loads
     console.log("DOM fully loaded, initializing family animations");
     initFamilyAnimations();
+
+    // Add Chart.js library
+    if (document.getElementById('placementsChart') || document.getElementById('winRatesChart')) {
+        const chartScript = document.createElement('script');
+        chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+        chartScript.onload = initCharts;
+        document.head.appendChild(chartScript);
+    }
 });
 
 // Player cards animation
@@ -1492,4 +1500,136 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, 500);
-})(); 
+})();
+
+function initCharts() {
+    // Initialize charts if the elements exist
+    if (document.getElementById('placementsChart')) {
+        const placementsCtx = document.getElementById('placementsChart').getContext('2d');
+        
+        new Chart(placementsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Dec 2024', 'Jan 2025', 'Feb 2025', 'Mar 2025'],
+                datasets: [{
+                    label: 'Tournament Placements',
+                    data: [null, 1, 2, null],
+                    backgroundColor: 'rgba(255, 153, 0, 0.2)',
+                    borderColor: '#ff9900',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#ff9900',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#ff9900',
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        reverse: true,
+                        min: 1,
+                        max: 4,
+                        ticks: {
+                            stepSize: 1,
+                            color: '#e0e0e0'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#e0e0e0'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#e0e0e0'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                if (value === null) {
+                                    return 'No tournament';
+                                }
+                                return value === 1 ? '1st Place' : 
+                                       value === 2 ? '2nd Place' : 
+                                       value === 3 ? '3rd Place' : 
+                                       value + 'th Place';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    if (document.getElementById('winRatesChart')) {
+        const winRatesCtx = document.getElementById('winRatesChart').getContext('2d');
+        
+        new Chart(winRatesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Group Stage', 'Playoffs', 'Overall'],
+                datasets: [{
+                    label: 'Win Rate (%)',
+                    data: [90, 80, 85],
+                    backgroundColor: [
+                        'rgba(255, 153, 0, 0.7)',
+                        'rgba(255, 153, 0, 0.5)',
+                        'rgba(255, 153, 0, 0.3)'
+                    ],
+                    borderColor: [
+                        '#ff9900',
+                        '#ff9900',
+                        '#ff9900'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#e0e0e0'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#e0e0e0'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#e0e0e0'
+                        }
+                    }
+                }
+            }
+        });
+    }
+} 
