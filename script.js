@@ -49,32 +49,121 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1.2,
             y: 50,
             opacity: 0,
-            ease: 'power4.out'
-        }, '-=0.4')
+            ease: 'power3.out'
+        }, '-=0.8')
         .from('.tagline', {
             duration: 1,
             y: 30,
             opacity: 0,
-            ease: 'power4.out'
-        }, '-=0.8')
+            ease: 'power3.out'
+        }, '-=0.6')
         .from('.hero-cta', {
-            duration: 1,
-            y: 30,
+            duration: 0.8,
+            y: 20,
             opacity: 0,
-            ease: 'power4.out'
-        }, '-=0.6');
-    
-    // Wolf overlay parallax effect
+            ease: 'power3.out',
+            stagger: 0.2
+        }, '-=0.4');
+
+    // Parallax effect for wolf overlay
     gsap.to('.wolf-overlay', {
+        yPercent: 30,
+        ease: 'none',
         scrollTrigger: {
             trigger: '.hero-section',
             start: 'top top',
             end: 'bottom top',
             scrub: true
+        }
+    });
+    
+    // Initialize family section animations
+    initFamilyAnimations();
+    
+    // Family Tree Animation
+    ScrollTrigger.create({
+        trigger: '.family-tree-container',
+        start: 'top 80%',
+        onEnter: () => {
+            // Animate the owner level
+            gsap.from('.owner-level .tree-node', {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.3,
+                ease: 'back.out(1.7)'
+            });
+            
+            // Animate the branches
+            gsap.from('.owner-branches .branch-line', {
+                duration: 0.6,
+                height: 0,
+                ease: 'power2.out',
+                delay: 0.8
+            });
+            
+            // Animate the management level
+            gsap.from('.management-level .tree-node', {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'back.out(1.7)',
+                delay: 1
+            });
+            
+            // Animate the management branches
+            gsap.from('.management-branches .branch-line', {
+                duration: 0.6,
+                height: 0,
+                ease: 'power2.out',
+                delay: 1.8
+            });
+            
+            // Animate the content level
+            gsap.from('.content-level .tree-node', {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                ease: 'back.out(1.7)',
+                delay: 2
+            });
         },
-        y: 100,
-        opacity: 0.02,
-        ease: 'none'
+        once: true
+    });
+    
+    // Family Cards Animation
+    ScrollTrigger.create({
+        trigger: '.family-card',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.from('.family-card', {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        },
+        once: true
+    });
+    
+    // Timeline Animation
+    ScrollTrigger.create({
+        trigger: '.timeline-container',
+        start: 'top 80%',
+        onEnter: () => {
+            gsap.from('.timeline-item', {
+                duration: 0.8,
+                x: function(i) {
+                    return i % 2 === 0 ? -50 : 50;
+                },
+                opacity: 0,
+                stagger: 0.3,
+                ease: 'power3.out'
+            });
+        },
+        once: true
     });
 
     // Scroll Animations
@@ -213,6 +302,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Player cards animation
     animatePlayerCards();
+
+    // Initialize player cards modal functionality
+    initPlayerCards();
+
+    // Initialize contact form
+    initContactForm();
+
+    // Initialize tournament visualization
+    initTournamentVisualization();
+
+    // Initialize performance optimization
+    initPerformanceOptimization();
+
+    // Initialize animations
+    initAnimations();
+
+    // Initialize lightning effects
+    initLightningEffects();
+
+    // Initialize particle effects
+    initParticleEffects();
+
+    // Check and create missing assets
+    checkAndCreateAssets();
+
+    // Initialize Valorant animations
+    initValorantAnimations();
+
+    // Initialize player cards
+    animatePlayerCards();
+
+    // Initialize family animations when the page loads
+    console.log("DOM fully loaded, initializing family animations");
+    initFamilyAnimations();
 });
 
 // Player cards animation
@@ -546,13 +669,23 @@ function initPlayerCards() {
     // Player stats data (additional stats that aren't in the data attributes)
     const playerStats = {
         // BGMI Players
-        'sarang': {
-            tournaments: 18,
-            wins: 7,
-            kd: 3.2,
-            avgPlacement: 3.5,
-            avgKills: 5.8,
-            clutches: 24
+        'jokerr': {
+            tournaments: 25,
+            wins: 12,
+            kd: 5.1,
+            avgPlacement: 2.2,
+            avgKills: 9.3,
+            clutches: 32,
+            specialization: 'Assaulter',
+            preferredWeapons: ['M416', 'AKM', 'DP-28'],
+            achievements: [
+                'Finals Survivor award in BMPS 2024',
+                'Multiple double-digit kill games in Grand Finals',
+                'Clutch plays in final circles secured critical wins',
+                'Top fragger in BGMI Masters Series Season 3',
+                'Consistent top 5 placements in individual kill leaderboards'
+            ],
+            bio: 'Born February 9, 2006. An assaulter and rising star, Jokerr is known for his aggressive playstyle and clutch performances. He joined Revenant XSpark in 2024 and quickly became a standout player.'
         },
         'spraygod': {
             tournaments: 22,
@@ -560,7 +693,33 @@ function initPlayerCards() {
             kd: 4.7,
             avgPlacement: 2.8,
             avgKills: 8.2,
-            clutches: 18
+            clutches: 18,
+            specialization: 'Fragger',
+            preferredWeapons: ['M416', 'Beryl M762', 'AWM'],
+            achievements: [
+                'Topped elimination charts in BGMS Season 3',
+                'Known for high-damage output in tournaments',
+                'Versatile fragger with consistent eliminations',
+                'Key contributor to BGIS 2024 victory'
+            ],
+            bio: 'Born June 12, 2003. A versatile fragger, SPRAYGOD contributes significantly to the team\'s firepower and consistency in eliminations.'
+        },
+        'sarang': {
+            tournaments: 18,
+            wins: 7,
+            kd: 3.2,
+            avgPlacement: 3.5,
+            avgKills: 5.8,
+            clutches: 24,
+            specialization: 'In-Game Leader (IGL)',
+            preferredWeapons: ['M416', 'Mini-14', 'SLR'],
+            achievements: [
+                'Orchestrated winning strategies in BGIS 2024',
+                'Praised for leadership under pressure',
+                'Balances aggression with tactical precision',
+                'Key player in securing BMPS 2024 victory'
+            ],
+            bio: 'Born September 7, 2002. The in-game leader (IGL), Sarang directs the team\'s strategies, balancing aggression with tactical precision.'
         },
         'shadow': {
             tournaments: 20,
@@ -568,82 +727,35 @@ function initPlayerCards() {
             kd: 2.9,
             avgPlacement: 2.5,
             avgKills: 4.5,
-            clutches: 15
+            clutches: 15,
+            specialization: 'Support',
+            preferredWeapons: ['UMP45', 'M416', 'Smoke Grenades'],
+            achievements: [
+                'Provides crucial backup and utility',
+                'Enables core players to shine',
+                'Consistent support performances',
+                'Master strategist behind multiple tournament wins'
+            ],
+            bio: 'A support player, Shadow7 provides crucial backup and utility, enabling the team\'s core players to shine.'
         },
-        'jokerr': {
-            tournaments: 25,
-            wins: 12,
-            kd: 5.1,
-            avgPlacement: 2.2,
-            avgKills: 9.3,
-            clutches: 32
-        },
-        'syed': {
-            tournaments: 10,
-            wins: 3,
-            kd: 2.5,
-            avgPlacement: 4.1,
-            avgKills: 3.8,
-            clutches: 8
-        },
-        
-        // Valorant Players
-        'antidote': {
-            tournaments: 15,
-            wins: 6,
-            kd: 1.8,
+        'ghatak': {
+            tournaments: 30,
+            wins: 15,
+            kd: 3.8,
             avgPlacement: 2.7,
-            avgKills: 18.5,
-            clutches: 21
+            avgKills: 6.2,
+            clutches: 28,
+            specialization: 'Director of Esports & Community',
+            preferredWeapons: ['M416', 'AKM', 'Kar98k'],
+            achievements: [
+                'Veteran player bringing experience and mentorship',
+                'Guides team strategy and development',
+                'Key figure in Indian esports scene',
+                'Director of Esports & Community for Revenant XSpark'
+            ],
+            bio: 'Born March 27, 1991. A veteran player and Director of Esports & Community, GHATAK brings experience and mentorship to the roster.'
         },
-        'azys': {
-            tournaments: 12,
-            wins: 5,
-            kd: 1.6,
-            avgPlacement: 2.9,
-            avgKills: 17.2,
-            clutches: 14
-        },
-        'deathmaker': {
-            tournaments: 14,
-            wins: 6,
-            kd: 1.9,
-            avgPlacement: 2.5,
-            avgKills: 22.1,
-            clutches: 19
-        },
-        'rawfiul': {
-            tournaments: 13,
-            wins: 5,
-            kd: 1.5,
-            avgPlacement: 3.1,
-            avgKills: 16.8,
-            clutches: 12
-        },
-        'georggyyy': {
-            tournaments: 10,
-            wins: 4,
-            kd: 1.7,
-            avgPlacement: 2.8,
-            avgKills: 19.3,
-            clutches: 16
-        },
-        'levi': {
-            tournaments: 6,
-            wins: 2,
-            kd: 1.4,
-            avgPlacement: 3.5,
-            avgKills: 15.7,
-            clutches: 8
-        },
-        'gobz': {
-            tournaments: 5,
-            wins: 2,
-            kd: 1.3,
-            avgPlacement: 3.8,
-            avgKills: 14.2,
-            clutches: 6
-        }
+        // ... existing Valorant players ...
     };
     
     // Add click event to each player card
@@ -658,7 +770,7 @@ function initPlayerCards() {
             
             // Populate modal with player data
             document.querySelector('.player-modal-name').textContent = playerName;
-            document.querySelector('.player-modal-realname').textContent = playerRealName;
+            document.querySelector('.player-modal-realname').textContent = playerRealName || '';
             document.querySelector('.player-modal-role').textContent = playerRole;
             document.querySelector('.player-earnings').textContent = playerEarnings;
             
@@ -673,13 +785,33 @@ function initPlayerCards() {
                 statValues[3].textContent = stats.avgPlacement;
                 statValues[4].textContent = stats.avgKills;
                 statValues[5].textContent = stats.clutches;
+                
+                // Add bio if available
+                if (stats.bio && document.querySelector('.player-full-bio')) {
+                    document.querySelector('.player-full-bio').textContent = stats.bio;
+                }
+                
+                // Add preferred weapons if available
+                if (stats.preferredWeapons && document.querySelector('.player-weapons')) {
+                    document.querySelector('.player-weapons').innerHTML = stats.preferredWeapons.map(weapon => 
+                        `<span class="weapon-tag">${weapon}</span>`
+                    ).join('');
+                }
+                
+                // Add specialization if available
+                if (stats.specialization && document.querySelector('.player-specialization')) {
+                    document.querySelector('.player-specialization').textContent = stats.specialization;
+                }
             }
             
             // Populate achievements
             const achievementsList = document.querySelector('.player-achievements-list');
             achievementsList.innerHTML = '';
             
-            playerAchievements.forEach(achievement => {
+            // Use extended achievements if available
+            const achievements = playerStats[playerId]?.achievements || playerAchievements;
+            
+            achievements.forEach(achievement => {
                 if (achievement.trim()) {
                     const li = document.createElement('li');
                     li.innerHTML = `
@@ -908,33 +1040,347 @@ function initAnimations() {
     initPerformanceOptimization();
 }
 
-// Initialize all animations and functionality
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded");
+// Initialize Family section animations
+function initFamilyAnimations() {
+    console.log("initFamilyAnimations called");
     
-    // Initialize animations
-    initAnimations();
+    // Check if Family section exists
+    const familySection = document.querySelector('#family');
+    console.log("Family section found:", familySection);
     
-    // Initialize player cards modal functionality
-    initPlayerCards();
-    
-    // Initialize contact form
-    initContactForm();
-    
-    // Check and create missing assets
-    checkAndCreateAssets();
-    
-    // Initialize performance optimization
-    initPerformanceOptimization();
-    
-    // Fallback to ensure player cards are visible even if animations fail
-    setTimeout(() => {
-        const playerCards = document.querySelectorAll('.player-card');
-        playerCards.forEach(card => {
-            card.style.opacity = '1';
+    if (familySection) {
+        console.log("Family tree:", document.querySelector('.family-tree'));
+        console.log("Owner level:", document.querySelector('.owner-level'));
+        console.log("Family cards:", document.querySelectorAll('.family-card').length);
+        
+        // Force visibility of all elements
+        document.querySelectorAll('.family-tree, .owner-level, .owner-branches, .management-level, .management-branches, .content-level, .tree-node, .node-content, .family-card').forEach(element => {
+            element.style.visibility = 'visible';
+            element.style.opacity = '1';
+            element.style.display = element.classList.contains('family-card') ? 'block' : '';
         });
-    }, 1000);
-});
+        
+        // Animate family tree nodes
+        gsap.from(".owner-level .tree-node", {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".family-tree",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Owner level animation started");
+                document.querySelectorAll('.owner-level .tree-node').forEach(node => {
+                    node.style.visibility = 'visible';
+                    node.style.opacity = 1;
+                });
+            }
+        });
+        
+        // Animate branches
+        gsap.from(".owner-branches .branch-line", {
+            scaleY: 0,
+            transformOrigin: "top",
+            duration: 0.4,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".owner-branches",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Owner branches animation started");
+                document.querySelectorAll('.owner-branches .branch-line').forEach(line => {
+                    line.style.visibility = 'visible';
+                });
+            }
+        });
+        
+        // Animate management level
+        gsap.from(".management-level .tree-node", {
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".management-level",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Management level animation started");
+                document.querySelectorAll('.management-level .tree-node').forEach(node => {
+                    node.style.visibility = 'visible';
+                    node.style.opacity = 1;
+                });
+            }
+        });
+        
+        // Animate management branches
+        gsap.from(".management-branches .branch-line", {
+            scaleY: 0,
+            transformOrigin: "top",
+            duration: 0.4,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".management-branches",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Management branches animation started");
+                document.querySelectorAll('.management-branches .branch-line').forEach(line => {
+                    line.style.visibility = 'visible';
+                });
+            }
+        });
+        
+        // Animate content level
+        gsap.from(".content-level .tree-node", {
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".content-level",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Content level animation started");
+                document.querySelectorAll('.content-level .tree-node').forEach(node => {
+                    node.style.visibility = 'visible';
+                    node.style.opacity = 1;
+                });
+            }
+        });
+        
+        // Animate family cards
+        gsap.from(".family-card", {
+            y: 40,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".family-card",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Family cards animation started");
+                document.querySelectorAll('.family-card').forEach(card => {
+                    card.style.visibility = 'visible';
+                    card.style.opacity = 1;
+                });
+            }
+        });
+        
+        // Animate timeline
+        gsap.from(".timeline-item", {
+            x: function(i) {
+                return i % 2 === 0 ? -50 : 50;
+            },
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".timeline-container",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            onStart: function() {
+                console.log("Timeline animation started");
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    item.style.visibility = 'visible';
+                    item.style.opacity = 1;
+                });
+            }
+        });
+    }
+}
+
+// Initialize tournament performance visualization
+function initTournamentVisualization() {
+    // Check if Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+        // Load Chart.js dynamically if not already loaded
+        const chartScript = document.createElement('script');
+        chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+        chartScript.onload = createCharts;
+        document.head.appendChild(chartScript);
+    } else {
+        createCharts();
+    }
+    
+    function createCharts() {
+        // Create tournament placements chart
+        if (document.getElementById('tournamentPlacementsChart')) {
+            const ctx = document.getElementById('tournamentPlacementsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['BGIS 2024', 'BMPS 2024', 'BGMS Season 3', 'Titans Rising'],
+                    datasets: [{
+                        label: 'Tournament Placement',
+                        data: [1, 1, 1, 8], // 1st place, 1st place, 1st place, 8th place
+                        backgroundColor: [
+                            'rgba(0, 255, 140, 0.7)',
+                            'rgba(0, 255, 140, 0.7)',
+                            'rgba(0, 255, 140, 0.7)',
+                            'rgba(0, 150, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 255, 140, 1)',
+                            'rgba(0, 255, 140, 1)',
+                            'rgba(0, 255, 140, 1)',
+                            'rgba(0, 150, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            reverse: true, // Reverse to show 1st place at the top
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Placement'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Tournament Placements (2024)'
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Create prize earnings trend chart
+        if (document.getElementById('earningsTrendChart')) {
+            const ctx = document.getElementById('earningsTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024'],
+                    datasets: [{
+                        label: 'Prize Earnings (USD)',
+                        data: [0, 47600, 119000, 59500], // Earnings by quarter
+                        backgroundColor: 'rgba(0, 255, 140, 0.2)',
+                        borderColor: 'rgba(0, 255, 140, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'USD'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Prize Earnings Trend (2024)'
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Create win rate pie chart
+        if (document.getElementById('winRateChart')) {
+            const ctx = document.getElementById('winRateChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Wins', 'Losses'],
+                    datasets: [{
+                        data: [33, 67], // 33% win rate in BMPS 2024
+                        backgroundColor: [
+                            'rgba(0, 255, 140, 0.7)',
+                            'rgba(50, 50, 50, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 255, 140, 1)',
+                            'rgba(50, 50, 50, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'BMPS 2024 Win Rate'
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
+    // Add tournament visualization section if it doesn't exist
+    if (!document.getElementById('tournamentVisualization') && document.querySelector('.bgmi-section')) {
+        const bgmiSection = document.querySelector('.bgmi-section');
+        const container = bgmiSection.querySelector('.container');
+        
+        // Create visualization section
+        const visualizationSection = document.createElement('div');
+        visualizationSection.id = 'tournamentVisualization';
+        visualizationSection.className = 'row g-4 mb-5';
+        visualizationSection.innerHTML = `
+            <h3 class="sub-title">Tournament Performance Visualization</h3>
+            <div class="col-md-6 mb-4">
+                <div class="stats-card">
+                    <h4>Tournament Placements</h4>
+                    <canvas id="tournamentPlacementsChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="stats-card">
+                    <h4>Win Rate (BMPS 2024)</h4>
+                    <canvas id="winRateChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="stats-card">
+                    <h4>Prize Earnings Trend</h4>
+                    <canvas id="earningsTrendChart"></canvas>
+                </div>
+            </div>
+        `;
+        
+        // Insert before the last section
+        const lastSection = container.querySelector('.row:last-of-type');
+        container.insertBefore(visualizationSection, lastSection);
+        
+        // Create charts
+        createCharts();
+    }
+}
 
 // Handle contact form submission
 function initContactForm() {
@@ -1023,4 +1469,27 @@ function initContactForm() {
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-} 
+}
+
+// Initialize family animations when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded, initializing family animations");
+    initFamilyAnimations();
+});
+
+// Immediate initialization for family section
+(function() {
+    // Wait for a short time to ensure DOM elements are accessible
+    setTimeout(function() {
+        console.log("Immediate initialization for family section");
+        
+        // Force visibility of all family elements
+        document.querySelectorAll('.family-tree, .owner-level, .owner-branches, .management-level, .management-branches, .content-level, .tree-node, .node-content, .family-card').forEach(element => {
+            if (element) {
+                element.style.visibility = 'visible';
+                element.style.opacity = '1';
+                element.style.display = element.classList.contains('family-card') ? 'block' : '';
+            }
+        });
+    }, 500);
+})(); 
