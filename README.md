@@ -1,64 +1,91 @@
 # Revenant Xspark Website
 
-A modern, responsive website for Revenant Xspark esports organization featuring a dark theme with neon accents and smooth animations.
+## Project Overview
+This is the official website for Revenant Xspark, a premier esports organization. The website showcases our teams, achievements, and provides information about our organization.
 
 ## Features
+- Responsive design with Tailwind CSS
+- Smooth scrolling navigation
+- Team rosters and tournament results
+- Contact form integration
+- Supabase backend for data management
 
-- Responsive design that works on all devices
-- Dark theme with vibrant neon accents
-- Smooth scrolling and parallax effects
-- GSAP animations for enhanced user experience
-- Contact form with file upload capability
-- Modern UI components using Bootstrap 5
-
-## Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Bootstrap 5.3.2
-- GSAP 3.12.5 (with ScrollTrigger plugin)
-
-## Getting Started
-
+## Installation
 1. Clone the repository
-2. Open `index.html` in your web browser
+   ```bash
+   git clone..
+2. Navigate to the project directory
+   ```bash
+   cd revenant-xspark
+   ```
+3. Install dependencies
+   ```bash
+   npm install
+   ```
+4. Create a `.env` file with your Supabase credentials
+   ```
+   REACT_APP_SUPABASE_URL=your-supabase-url
+   REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
+
+## Available Scripts
+- `npm start`: Runs the app in development mode
+- `npm run build`: Builds the app for production
+- `npm test`: Launches the test runner
+- `npm run eject`: Ejects the app from Create React App
 
 ## Project Structure
-
 ```
-.
-├── index.html          # Main HTML file
-├── styles.css         # CSS styles
-├── script.js         # JavaScript functionality
-└── README.md        # Project documentation
+src/
+├── components/            # React components
+│   ├── Navbar.js          # Navigation bar
+│   ├── HeroSection.js     # Hero section
+│   ├── AboutSection.js    # About section
+│   ├── BGMISection.js     # BGMI team section
+│   ├── ValorantSection.js # Valorant team section
+│   ├── PokemonUniteSection.js # Pokemon Unite section
+│   ├── FamilySection.js   # Organization members
+│   └── ContactSection.js  # Contact form
+├── supabaseClient.js      # Supabase client configuration
+└── index.css              # Tailwind CSS and custom styles
 ```
 
-## Browser Support
+## Component Details
+### Navbar.js
+Responsive navigation bar with smooth scrolling to sections
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+### HeroSection.js
+Introduction section with team logo and social media links
 
-## Development
+### AboutSection.js
+Information about the organization and its values
 
-To modify the website:
+### BGMISection.js
+BGMI team roster and tournament results
 
-1. Edit `index.html` for structure changes
-2. Modify `styles.css` for styling updates
-3. Update `script.js` for new functionality
+### ValorantSection.js
+Valorant team information and agent specialties
 
-## Contact Form
+### PokemonUniteSection.js
+Pokemon Unite team details and recent matches
 
-The contact form includes:
-- Name field
-- Email field
-- Message field
-- File upload (supports images and PDFs up to 5MB)
+### FamilySection.js
+Organization members with role-based filtering
 
-## Notes
+### ContactSection.js
+Contact form with email and social media links
 
-- The website uses GSAP for animations
-- Parallax effects are implemented for modern browsers
-- The design is mobile-first and fully responsive 
+## Supabase Integration
+The project uses Supabase for:
+- Storing team member information
+- Managing tournament results
+- Handling contact form submissions
+
+## Deployment
+1. Build the project
+   ```bash
+   npm run build
+   ```
+2. Deploy the `build` folder to your hosting provider
+
+For more details, visit our [official documentation](#).
