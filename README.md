@@ -1,7 +1,7 @@
 # Revenant Xspark Website
 
 ## Project Overview
-This is the official website for Revenant Xspark, a premier esports organization. The website showcases our teams, achievements, and provides information about our organization.
+This is the fan website for Revenant Xspark, a premier esports organization. The website showcases our teams, achievements, and provides information about our organization.
 
 ## Features
 - Responsive design with Tailwind CSS
